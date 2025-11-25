@@ -21,6 +21,15 @@ class MLService {
    * @returns {Promise<Object>} 辨識結果
    */
   async recognizeFood(imageData) {
+    // 注意：Hugging Face API 有 CORS 限制，瀏覽器無法直接調用
+    // 目前使用模擬模式展示功能
+    // v0.4 將實作後端代理以啟用真實 API
+
+    console.log('🎭 使用 AI 模擬模式（展示功能）');
+    console.log('💡 真實 ML API 需要後端支援，計劃於 v0.4 實作');
+
+    return this.mockRecognition(imageData);
+
     // 本地測試模式：檢測是否為 localhost
     const isLocalhost = window.location.hostname === 'localhost' ||
       window.location.hostname === '127.0.0.1';
@@ -377,6 +386,12 @@ class DailyMeals {
 
       // 儲存分析結果
       this.saveAIAnalysis(meal, result, nutrition);
+
+      // 首次使用提示
+      if (!localStorage.getItem('ai_demo_notice_shown')) {
+        this.showToast('ℹ️ 目前使用 AI 模擬模式展示功能', 'info');
+        localStorage.setItem('ai_demo_notice_shown', 'true');
+      }
 
       this.showToast('✅ 食物辨識成功！', 'success');
 
