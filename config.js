@@ -8,12 +8,18 @@ const CONFIG = {
     VERSION: '0.3.0',
     APP_NAME: 'DailyMeals',
 
-    // Hugging Face API Settings
+    // Hugging Face API Settings (v0.4)
     HF_API: {
         enabled: true,
-        token: '', // 用戶需要設置自己的 token
+        // v0.4: 使用 Cloudflare Worker 代理
+        useProxy: true,
+        proxyEndpoint: 'https://dailymeals-api.dailymeals-api.workers.dev',
+
+        // 備用設定
+        token: '', // 不再需要（Worker 管理）
         model: 'nateraw/food',
-        endpoint: 'https://api-inference.huggingface.co/models/nateraw/food',
+        directEndpoint: 'https://api-inference.huggingface.co/models/nateraw/food',
+
         timeout: 15000, // 15秒超時
         confidenceThreshold: 0.3 // 信心度門檻 30%
     },

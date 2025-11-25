@@ -21,24 +21,26 @@ class MLService {
    * @returns {Promise<Object>} 辨識結果
    */
   async recognizeFood(imageData) {
-    // 注意：Hugging Face API 有 CORS 限制，瀏覽器無法直接調用
-    // 目前使用模擬模式展示功能
-    // v0.4 將實作後端代理以啟用真實 API
-
-    console.log('🎭 使用 AI 模擬模式（展示功能）');
-    console.log('💡 真實 ML API 需要後端支援，計劃於 v0.4 實作');
-
-    return this.mockRecognition(imageData);
-
-    // 本地測試模式：檢測是否為 localhost
-    const isLocalhost = window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1';
-
-    if (isLocalhost) {
-      console.log('🧪 本地測試模式：使用模擬 ML 辨識');
-      return this.mockRecognition(imageData);
+    // v0.4: 透過 Cloudflare Worker 使用真實 ML API
+    if (CONFIG.HF_API.useProxy && CONFIG.HF_API.proxyEndpoint) {
+      try {
+        console.log('🌐 使用真實 ML API（透過 Cloudflare Worker）');
+        return await this.recognizeFoodViaProxy(imageData);
+      } catch (error) {
+        console.warn('⚠️ Worker API 失敗，降級到模擬模式:', error.message);
+        return this.mockRecognition(imageData);
+      }
     }
 
+    // 降級：使用模擬模式
+    console.log('🎭 使用 AI 模擬模式');
+    return this.mockRecognition(imageData);
+  }
+
+  /**
+   * 透過 Cloudflare Worker 調用 HF API
+   */
+  async recognizeFoodViaProxy(imageData) {
     try {
       // 轉換 base64 為 blob
       const base64Image = imageData.includes(',')
@@ -52,15 +54,12 @@ class MLService {
       }
       const blob = new Blob([bytes], { type: 'image/jpeg' });
 
-      // 呼叫 HF API
+      // 調用 Worker
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
-      const response = await fetch(this.endpoint, {
+      const response = await fetch(CONFIG.HF_API.proxyEndpoint, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${this.token}`
-        },
         body: blob,
         signal: controller.signal
       });
@@ -69,18 +68,19 @@ class MLService {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `API 錯誤: ${response.status}`);
+        throw new Error(errorData.error || `Worker API 錯誤: ${response.status}`);
       }
 
       const predictions = await response.json();
+      console.log('✅ 真實 ML 辨識成功:', predictions.length, '個結果');
       return this.parseResults(predictions);
 
     } catch (error) {
       if (error.name === 'AbortError') {
         throw new Error('辨識超時，請稍後再試');
       }
-      console.error('ML API 錯誤:', error);
-      throw new Error('食物辨識失敗：' + (error.message || '未知錯誤'));
+      console.error('Worker API 錯誤:', error);
+      throw error; // 讓上層處理降級
     }
   }
 
@@ -388,9 +388,9 @@ class DailyMeals {
       this.saveAIAnalysis(meal, result, nutrition);
 
       // 首次使用提示
-      if (!localStorage.getItem('ai_demo_notice_shown')) {
-        this.showToast('ℹ️ 目前使用 AI 模擬模式展示功能', 'info');
-        localStorage.setItem('ai_demo_notice_shown', 'true');
+      if (!localStorage.getItem('ai_v04_notice_shown')) {
+        this.showToast('✨ v0.4: 現使用真實 ML API！', 'info');
+        localStorage.setItem('ai_v04_notice_shown', 'true');
       }
 
       this.showToast('✅ 食物辨識成功！', 'success');
