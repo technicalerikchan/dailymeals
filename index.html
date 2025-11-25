@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DailyMeals - 每日三餐紀錄</title>
+  <title>DailyMeals - 智能飲食記錄</title>
   <meta name="description" content="簡單優雅的飲食紀錄工具，每天記錄早餐、午餐、晚餐照片" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="config.js"></script>
 </head>
+
 <body>
   <!-- Background gradient animation -->
   <div class="bg-gradient"></div>
-  
+
   <!-- Header -->
   <header class="header">
     <div class="header-content">
       <div class="logo">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="14" fill="url(#gradient)" opacity="0.2"/>
-          <path d="M16 8C12.686 8 10 10.686 10 14C10 17.314 12.686 20 16 20C19.314 20 22 17.314 22 14C22 10.686 19.314 8 16 8Z" fill="url(#gradient)"/>
-          <ellipse cx="16" cy="22" rx="8" ry="2" fill="url(#gradient)" opacity="0.6"/>
+          <circle cx="16" cy="16" r="14" fill="url(#gradient)" opacity="0.2" />
+          <path
+            d="M16 8C12.686 8 10 10.686 10 14C10 17.314 12.686 20 16 20C19.314 20 22 17.314 22 14C22 10.686 19.314 8 16 8Z"
+            fill="url(#gradient)" />
+          <ellipse cx="16" cy="22" rx="8" ry="2" fill="url(#gradient)" opacity="0.6" />
           <defs>
             <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-              <stop offset="0%" stop-color="#667eea"/>
-              <stop offset="100%" stop-color="#764ba2"/>
+              <stop offset="0%" stop-color="#667eea" />
+              <stop offset="100%" stop-color="#764ba2" />
             </linearGradient>
           </defs>
         </svg>
@@ -41,18 +46,18 @@
     <section class="date-section">
       <button class="date-nav-btn" id="prevDay" aria-label="前一天">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-          <path d="M12 4L6 10L12 16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 4L6 10L12 16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
-      
+
       <div class="date-display">
         <div class="date-label">今日紀錄</div>
         <div class="date-value" id="currentDate"></div>
       </div>
-      
+
       <button class="date-nav-btn" id="nextDay" aria-label="下一天">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-          <path d="M8 4L14 10L8 16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 4L14 10L8 16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
     </section>
@@ -68,34 +73,46 @@
             <p class="meal-subtitle">Breakfast</p>
           </div>
         </div>
-        
+
         <div class="image-container">
           <div class="image-preview" id="preview-breakfast">
             <div class="empty-state">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor">
-                <rect x="8" y="8" width="32" height="32" rx="4" stroke-width="2"/>
-                <circle cx="18" cy="20" r="3" stroke-width="2"/>
-                <path d="M8 32L16 24L24 32L32 24L40 32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="8" y="8" width="32" height="32" rx="4" stroke-width="2" />
+                <circle cx="18" cy="20" r="3" stroke-width="2" />
+                <path d="M8 32L16 24L24 32L32 24L40 32" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
               <p>尚未上傳照片</p>
             </div>
           </div>
           <button class="upload-trigger" data-target="breakfast-input">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-              <path d="M10 4V16M4 10H16" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 4V16M4 10H16" stroke-width="2" stroke-linecap="round" />
             </svg>
             <span>上傳照片</span>
           </button>
           <input type="file" id="breakfast-input" accept="image/*" hidden data-input="breakfast" />
         </div>
-        
+
         <div class="note-section">
           <label for="breakfast-note">備註</label>
-          <textarea 
-            id="breakfast-note" 
-            data-note="breakfast"
-            placeholder="例如：燕麥牛奶、香蕉一根"
-            rows="2"></textarea>
+          <textarea id="breakfast-note" data-note="breakfast" placeholder="例如：燕麥牛奶、香蕉一根" rows="2"></textarea>
+        </div>
+
+        <!-- AI 辨識區域 (v0.3) -->
+        <div class="ai-section" id="ai-section-breakfast" style="display:none;">
+          <button class="ai-analyze-btn" data-meal="breakfast">
+            <span class="ai-icon">🤖</span>
+            <span>AI 辨識食物</span>
+          </button>
+
+          <div class="ai-loading" id="ai-loading-breakfast" style="display:none;">
+            <div class="spinner"></div>
+            <span>AI 正在分析中...</span>
+          </div>
+
+          <div class="ai-result" id="ai-result-breakfast" style="display:none;"></div>
         </div>
       </article>
 
@@ -108,34 +125,46 @@
             <p class="meal-subtitle">Lunch</p>
           </div>
         </div>
-        
+
         <div class="image-container">
           <div class="image-preview" id="preview-lunch">
             <div class="empty-state">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor">
-                <rect x="8" y="8" width="32" height="32" rx="4" stroke-width="2"/>
-                <circle cx="18" cy="20" r="3" stroke-width="2"/>
-                <path d="M8 32L16 24L24 32L32 24L40 32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="8" y="8" width="32" height="32" rx="4" stroke-width="2" />
+                <circle cx="18" cy="20" r="3" stroke-width="2" />
+                <path d="M8 32L16 24L24 32L32 24L40 32" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
               <p>尚未上傳照片</p>
             </div>
           </div>
           <button class="upload-trigger" data-target="lunch-input">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-              <path d="M10 4V16M4 10H16" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 4V16M4 10H16" stroke-width="2" stroke-linecap="round" />
             </svg>
             <span>上傳照片</span>
           </button>
           <input type="file" id="lunch-input" accept="image/*" hidden data-input="lunch" />
         </div>
-        
+
         <div class="note-section">
           <label for="lunch-note">備註</label>
-          <textarea 
-            id="lunch-note"
-            data-note="lunch"
-            placeholder="例如：雞胸肉沙拉、無糖綠茶"
-            rows="2"></textarea>
+          <textarea id="lunch-note" data-note="lunch" placeholder="例如：雞胸肉沙拉、無糖綠茶" rows="2"></textarea>
+        </div>
+
+        <!-- AI 辨識區域 (v0.3) -->
+        <div class="ai-section" id="ai-section-lunch" style="display:none;">
+          <button class="ai-analyze-btn" data-meal="lunch">
+            <span class="ai-icon">🤖</span>
+            <span>AI 辨識食物</span>
+          </button>
+
+          <div class="ai-loading" id="ai-loading-lunch" style="display:none;">
+            <div class="spinner"></div>
+            <span>AI 正在分析中...</span>
+          </div>
+
+          <div class="ai-result" id="ai-result-lunch" style="display:none;"></div>
         </div>
       </article>
 
@@ -148,34 +177,46 @@
             <p class="meal-subtitle">Dinner</p>
           </div>
         </div>
-        
+
         <div class="image-container">
           <div class="image-preview" id="preview-dinner">
             <div class="empty-state">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor">
-                <rect x="8" y="8" width="32" height="32" rx="4" stroke-width="2"/>
-                <circle cx="18" cy="20" r="3" stroke-width="2"/>
-                <path d="M8 32L16 24L24 32L32 24L40 32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="8" y="8" width="32" height="32" rx="4" stroke-width="2" />
+                <circle cx="18" cy="20" r="3" stroke-width="2" />
+                <path d="M8 32L16 24L24 32L32 24L40 32" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
               </svg>
               <p>尚未上傳照片</p>
             </div>
           </div>
           <button class="upload-trigger" data-target="dinner-input">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-              <path d="M10 4V16M4 10H16" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 4V16M4 10H16" stroke-width="2" stroke-linecap="round" />
             </svg>
             <span>上傳照片</span>
           </button>
           <input type="file" id="dinner-input" accept="image/*" hidden data-input="dinner" />
         </div>
-        
+
         <div class="note-section">
           <label for="dinner-note">備註</label>
-          <textarea 
-            id="dinner-note"
-            data-note="dinner"
-            placeholder="例如：牛肉麵、半糖珍奶"
-            rows="2"></textarea>
+          <textarea id="dinner-note" data-note="dinner" placeholder="例如：牛肉麵、半糖珍奶" rows="2"></textarea>
+        </div>
+
+        <!-- AI 辨識區域 (v0.3) -->
+        <div class="ai-section" id="ai-section-dinner" style="display:none;">
+          <button class="ai-analyze-btn" data-meal="dinner">
+            <span class="ai-icon">🤖</span>
+            <span>AI 辨識食物</span>
+          </button>
+
+          <div class="ai-loading" id="ai-loading-dinner" style="display:none;">
+            <div class="spinner"></div>
+            <span>AI 正在分析中...</span>
+          </div>
+
+          <div class="ai-result" id="ai-result-dinner" style="display:none;"></div>
         </div>
       </article>
     </section>
@@ -198,4 +239,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
