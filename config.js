@@ -5,7 +5,7 @@
 
 const CONFIG = {
     // Application Info
-    VERSION: '0.3.0',
+    VERSION: '0.4.1',
     APP_NAME: 'DailyMeals',
 
     // Hugging Face API Settings (v0.4)
