@@ -1,138 +1,241 @@
-# DailyMeals - 每日三餐紀錄
+# DailyMeals v0.4.1
 
-<div align="center">
+🍽️ **智能飲食記錄 Web 應用**
 
-🍽️ 簡單優雅的飲食紀錄工具 🍽️
+記錄每一餐，追蹤每一天的營養攝取。
 
-![Version](https://img.shields.io/badge/version-0.2-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
-</div>
-
-## 📖 簡介
-
-DailyMeals 是一個現代化的飲食紀錄 Web 應用程式，讓您能夠輕鬆記錄每天的早餐、午餐、晚餐照片與備註。採用精美的深色模式設計，支援本地儲存，無需網路連線即可使用。
-
-## ✨ 主要功能
-
-- 📸 **三餐照片上傳** - 為早餐、午餐、晚餐上傳照片
-- 📅 **日期導航** - 輕鬆切換查看不同日期的記錄
-- 📝 **備註功能** - 為每餐添加文字備註
-- 💾 **本地儲存** - 使用 localStorage 持久化資料
-- 📊 **統計資訊** - 追蹤今日記錄數與連續記錄天數
-- 🎨 **精美設計** - 現代化深色模式與流暢動畫
-
-## 🚀 快速開始
-
-### 方法 1：直接開啟
-
-在瀏覽器中直接開啟 `index.html` 檔案即可使用。
-
-### 方法 2：本地伺服器（建議）
-
-```bash
-# 使用 Python 3
-python3 -m http.server 8080
-
-# 在瀏覽器開啟
-# http://localhost:8080
-```
-
-## 🎯 使用方式
-
-1. **上傳照片**
-   - 點擊「上傳照片」按鈕
-   - 選擇圖片檔案（支援 jpg, png, gif 等）
-   - 照片會立即顯示並自動儲存
-
-2. **添加備註**
-   - 在備註欄位輸入文字
-   - 失焦時自動儲存
-
-3. **切換日期**
-   - 使用左右箭頭切換日期
-   - 自動載入該日的記錄
-
-4. **查看統計**
-   - 今日已記錄餐數
-   - 連續完整記錄天數
-
-## 📁 專案結構
-
-```
-dailymeals/
-├── index.html    # 主頁面
-├── style.css     # 樣式表
-├── app.js        # 應用邏輯
-└── README.md     # 說明文件
-```
-
-## 🛠️ 技術棧
-
-- **HTML5** - 語意化標籤
-- **CSS3** - 現代化樣式、動畫、Grid/Flexbox
-- **JavaScript (ES6)** - Class-based 架構
-- **LocalStorage API** - 資料持久化
-- **FileReader API** - 圖片處理
-
-## 🎨 設計特色
-
-- 深色模式主題
-- 紫色系漸層配色
-- 玻璃擬態效果
-- 流暢動畫過渡
-- 完全響應式設計
-- 使用 Google Fonts (Outfit)
-
-## 📱 瀏覽器支援
-
-- ✅ Chrome (推薦)
-- ✅ Safari
-- ✅ Edge
-- ✅ Firefox
-
-## 🔒 隱私說明
-
-- 所有資料僅儲存在您的瀏覽器本地
-- 不會上傳任何資料到伺服器
-- 無需帳號註冊
-- 完全離線可用
-
-## 📝 版本歷史
-
-### v0.2 (當前版本)
-- ✅ 完整 UI/UX 設計
-- ✅ 照片上傳與預覽
-- ✅ 日期切換功能
-- ✅ localStorage 持久化
-- ✅ 統計資訊
-- ✅ Toast 通知
-
-### 未來計劃 (v1.0)
-- 🔮 雲端同步
-- 🔮 使用者帳號系統
-- 🔮 營養資訊標記
-- 🔮 匯出報表功能
-
-## 💡 使用提示
-
-1. **圖片大小**：建議上傳小於 2MB 的圖片
-2. **瀏覽器**：使用最新版本瀏覽器以獲得最佳體驗
-3. **備份**：定期截圖或匯出重要資料
-4. **習慣養成**：每餐後立即記錄，追蹤連續天數
-
-## 🤝 貢獻
-
-歡迎提出建議或回報問題！
-
-## 📄 授權
-
-MIT License
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://technicalerikchan.github.io/dailymeals/)
+[![Version](https://img.shields.io/badge/version-0.4.1-blue)](https://github.com/technicalerikchan/dailymeals)
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 ---
 
-<div align="center">
+## ✨ 功能特色
 
-用 ❤️ 打造的飲食紀錄工具
+- 📸 **照片記錄** - 每日三餐照片上傳與預覽
+- 🤖 **AI 辨識** - 自動辨識食物種類（96% 準確度）
+- 📊 **營養追蹤** - 顯示卡路里、蛋白質、碳水、脂肪
+- 📅 **歷史瀏覽** - 日期導航查看過往記錄
+- 💬 **備註功能** - 為每餐添加文字說明
+- 🌙 **深色主題** - 優雅的深色 UI 設計
+- 💾 **本地儲存** - 無需註冊，資料保存在瀏覽器
+- 📱 **響應式** - 支援手機、平板、電腦
 
-</div>
+---
+
+## 🚀 快速開始
+
+### 線上使用
+
+訪問：**https://technicalerikchan.github.io/dailymeals/**
+
+### 本地運行
+
+```bash
+# Clone 專案
+git clone https://github.com/technicalerikchan/dailymeals.git
+cd dailymeals
+
+# 啟動本地伺服器（任選一種）
+python3 -m http.server 8080
+# 或
+npx http-server -p 8080
+
+# 訪問
+open http://localhost:8080
+```
+
+---
+
+## 📸 截圖
+
+<table>
+<tr>
+<td width="50%">
+
+### 主介面
+![Main Interface](docs/screenshots/main.png)
+
+</td>
+<td width="50%">
+
+### AI 辨識
+![AI Recognition](docs/screenshots/ai.png)
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ 技術架構
+
+### 前端
+- **HTML5 + CSS3 + Vanilla JavaScript**
+- **無框架** - 純前端實作
+- **localStorage** - 本地資料儲存
+- **Google Fonts** - Inter 字體
+
+### 後端
+- **Cloudflare Workers** - Serverless API 代理
+- **HuggingFace** - ML 食物辨識模型
+
+### 部署
+- **GitHub Pages** - 前端託管
+- **Cloudflare Workers** - API 服務
+
+### ML Model
+- **Kaludi/food-category-classification-v2.0**
+- 準確度：96.0% (F1 Score)
+- 支援 12 種食物類別
+
+---
+
+## 📂 專案結構
+
+```
+dailymeals/
+├── index.html              # 主頁面
+├── style.css              # 樣式表
+├── app.js                 # 應用邏輯
+├── config.js              # 配置文件
+├── README.md              # 本文件
+├── PROJECT_HANDBOOK.md    # 完整開發手冊
+└── dailymeals-api/        # Worker API
+    ├── worker.js          # Worker 代碼
+    ├── wrangler.toml      # Worker 配置
+    └── README.md          # Worker 說明
+```
+
+---
+
+## 🛠️ 開發
+
+### 環境需求
+
+- Node.js 18+
+- Git
+- 現代瀏覽器
+
+### 安裝依賴
+
+```bash
+# 安裝 Wrangler CLI（用於 Worker 開發）
+npm install -g wrangler
+```
+
+### 開發工作流程
+
+1. **修改前端代碼** - 編輯 HTML/CSS/JS
+2. **本地測試** - 瀏覽器重新整理
+3. **提交更改** - Git commit
+4. **部署** - Push 到 GitHub（自動部署）
+
+### 部署 Worker
+
+```bash
+cd dailymeals-api
+wrangler login
+wrangler deploy
+```
+
+---
+
+## 📖 完整文檔
+
+詳細的開發指南請參閱：
+
+**[PROJECT_HANDBOOK.md](./PROJECT_HANDBOOK.md)** - 完整專案手冊
+
+內容包括：
+- 🏗️ 詳細技術架構
+- 📝 代碼結構說明
+- 🔧 開發工作流程
+- 🚀 部署指南
+- 📊 API 文檔
+- 🗺️ 未來開發計劃
+- 🐛 故障排除
+- 🔐 維護指南
+
+---
+
+## 🗺️ 版本規劃
+
+### v0.4.1 (當前)
+- ✅ 照片記錄功能
+- ✅ AI 辨識 UI
+- ✅ 營養資訊顯示
+- ⚠️ ML API 待修復
+
+### v0.5 (規劃中)
+- [ ] 修復 HF API 410 錯誤
+- [ ] 真實 ML 辨識功能
+- [ ] 改進錯誤處理
+
+### v0.6 (未來)
+- [ ] 多物體辨識
+- [ ] 資料統計圖表
+- [ ] 匯出功能
+
+### v1.0 (目標)
+- [ ] PWA 支援
+- [ ] 離線功能
+- [ ] 多語言支援
+
+---
+
+## 🤝 貢獻
+
+歡迎 Pull Requests！
+
+### 貢獻流程
+
+1. Fork 專案
+2. 創建 feature 分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. Push 到分支 (`git push origin feature/AmazingFeature`)
+5. 開啟 Pull Request
+
+---
+
+## 📝 授權
+
+**MIT License**
+
+Copyright (c) 2025 Erik Chan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction.
+
+---
+
+## 👤 作者
+
+**Erik Chan**
+
+- GitHub: [@technicalerikchan](https://github.com/technicalerikchan)
+- Email: technicalerikchan@gmail.com
+
+---
+
+## 🙏 致謝
+
+- [HuggingFace](https://huggingface.co/) - ML 模型託管
+- [Cloudflare Workers](https://workers.cloudflare.com/) - Serverless 平台
+- [GitHub Pages](https://pages.github.com/) - 免費託管
+- [Google Fonts](https://fonts.google.com/) - Inter 字體
+
+---
+
+## 📊 專案狀態
+
+![GitHub last commit](https://img.shields.io/github/last-commit/technicalerikchan/dailymeals)
+![GitHub issues](https://img.shields.io/github/issues/technicalerikchan/dailymeals)
+![GitHub stars](https://img.shields.io/github/stars/technicalerikchan/dailymeals)
+
+---
+
+**Made with ❤️ by Erik Chan**
+
+[⬆ 回到頂部](#dailymeals-v041)
